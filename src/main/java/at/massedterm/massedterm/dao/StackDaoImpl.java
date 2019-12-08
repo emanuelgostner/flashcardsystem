@@ -18,11 +18,10 @@ public class StackDaoImpl implements StackDao {
 	@Override
 	public List<Stack> getAllStacks() {
 		String sql = "SELECT * FROM stacks";
-		List<Stack> stacks = jdbcTemplate.query(
-				sql,
-				new BeanPropertyRowMapper(Stack.class)
-		);
-		return stacks;
+		return jdbcTemplate.query(
+						sql,
+						new BeanPropertyRowMapper(Stack.class)
+				);
 	}
 	
 	@Override

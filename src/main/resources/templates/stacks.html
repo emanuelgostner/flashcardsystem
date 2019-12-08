@@ -3,12 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/_bootstrap_reboot.css}"/>
+    <link rel="stylesheet" th:href="@{/css/_bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/stacks.css}"/>
 </head>
 <body>
-    <h1>Welcome to the home screen (>*.*)></h1>
-    <div th:each="stack : ${stacks}">
-        <div th:text="${stack.stackname}"></div>
-        <a role="button" th:href="@{'/stacks'+${stack.stackid}}" class="btn btn-primary">Primary</a>
+    <h1>
+        <span>Welcome to the home screen (>*.*)></span>
+        <span class="icon-home"></span>
+        <span class="icon-books"></span>
+        <span class="icon-stack"></span>
+    </h1>
+
+    <div class="card-columns">
+        <div th:each="stack : ${stacks}" th:remove="tag">
+            <a th:href="@{'/stacks/'+${stack.stackid}}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 th:text="${stack.stackname}" class="card-title">Card title</h5>
+                        <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </a>
     </div>
+    <script type="text/javascript" th:src="@{/js/stacks.js}"></script>
 </body>
 </html>
