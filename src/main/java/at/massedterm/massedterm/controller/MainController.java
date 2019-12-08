@@ -14,8 +14,13 @@ public class MainController {
 	@Autowired
 	private StackDaoImpl stackDao;
 	
+	@GetMapping("/")
+	public String home(){
+		return "redirect:stacks";
+	}
+	
 	@GetMapping("/stacks")
-	public String home(Model model){
+	public String stacks(Model model){
 		List<Stack> stacks = stackDao.getAllStacks();
 		model.addAttribute("stacks",stacks);
 		
