@@ -16,8 +16,9 @@ public class StackDaoImpl implements StackDao {
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override
-	public List<Stack> getAllStacks() {
-		String sql = "SELECT * FROM stacks";
+	public List<Stack> getAllStacks(String user) {
+		//String sql = "SELECT * FROM stacks";
+		String sql = "SELECT stacks.*, COUNT(cards.cardid) as cardCount FROM stacks LEFT JOIN cards ON cards.stackid = stacks.stackid group by 1 HAVING stacks.user="+"'"+user+"'";
 		return jdbcTemplate.query(
 						sql,
 						new BeanPropertyRowMapper(Stack.class)

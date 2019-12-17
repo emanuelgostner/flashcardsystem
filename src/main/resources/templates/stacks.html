@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/_bootstrap_reboot.css}"/>
     <link rel="stylesheet" th:href="@{/css/_bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/css/icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/css/stacks.css}"/>
 </head>
 <body>
@@ -15,19 +16,26 @@
         <span class="icon-books"></span>
         <span class="icon-stack"></span>
     </h1>
-
-    <div class="card-columns">
-        <div th:each="stack : ${stacks}" th:remove="tag">
-            <a th:href="@{'/stacks/'+${stack.stackid}}">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 th:text="${stack.stackname}" class="card-title">Card title</h5>
-                        <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
-                </div>
-            </a>
+    <div class="stackContainer">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
     </div>
+    <script id="stacks-template" type="text/x-handlebars-template">
+        <div class="card-columns">
+            {{#each this}}
+                <a href="./stacks/{{stackid}}" class="text-reset">
+                   <div class="card">
+                       <div class="card-body">
+                           <h5  class="card-title">{{stackname}}</h5>
+                           <p class="card-text"><small class="text-muted">{{cardCount}} terms</small></p>
+                       </div>
+                   </div>
+               </a>
+            {{/each}}
+        </div>
+    </script>
+    <script type="text/javascript" th:src="@{/js/lib/handlebars-v4.5.3.js}"></script>
     <script type="text/javascript" th:src="@{/js/stacks.js}"></script>
 </body>
 </html>

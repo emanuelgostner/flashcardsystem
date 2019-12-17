@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -20,8 +21,9 @@ public class MainController {
 	}
 	
 	@GetMapping("/stacks")
-	public String stacks(Model model){
-		List<Stack> stacks = stackDao.getAllStacks();
+	public String stacks(Model model, Principal principal){
+		String username = principal != null ? principal.getName() : "";
+		List<Stack> stacks = stackDao.getAllStacks(username);
 		model.addAttribute("stacks",stacks);
 		
 		return "stacks";

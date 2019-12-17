@@ -6,6 +6,7 @@ public class Stack {
 	private long stackid;
 	private String stackname;
 	private String user;
+	private int cardCount;
 	private List<Card> cardlist;
 	
 	public void setStackid(long stackid) {
@@ -30,6 +31,14 @@ public class Stack {
 	
 	public void setUser(String user) {
 		this.user = user;
+	}
+	
+	public int getCardCount() {
+		return cardCount;
+	}
+	
+	public void setCardCount(int cardCount) {
+		this.cardCount = cardCount;
 	}
 	
 	public List<Card> getCardlist() {
