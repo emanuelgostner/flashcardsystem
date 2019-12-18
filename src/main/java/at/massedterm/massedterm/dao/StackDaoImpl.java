@@ -4,11 +4,15 @@ import at.massedterm.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
 import java.security.Principal;
+import java.sql.*;
 import java.util.List;
 
 @Transactional
@@ -33,8 +37,25 @@ public class StackDaoImpl implements StackDao {
 	
 	@Override
 	public void addStack(String user, Stack stack) {
+		
+		
 		String query = "INSERT INTO stacks(stackname, user) VALUES(?, ?)";
-		jdbcTemplate.update(query, stack.getStackname(), user);
+		//jdbcTemplate.update(query, stack.getStackname(), user);
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		jdbcTemplate.update(
+		    new PreparedStatementCreator() {
+		        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+		            PreparedStatement ps =
+		                connection.prepareStatement(query, new String[] {"id"});
+		            ps.setString(1, stack.getStackname());
+		            ps.setString(2, user);
+		            return ps;
+		        }
+		    },
+		    keyHolder);
+		Number i =  keyHolder.getKey();
+		System.out.println(i);
 		//TODO: create success/fail response
 	}
 	
