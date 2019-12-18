@@ -20,6 +20,7 @@ public class MainController {
 		return "redirect:stacks";
 	}
 	
+	
 	@GetMapping("/stacks")
 	public String stacks(Model model, Principal principal){
 		String username = principal != null ? principal.getName() : "";
@@ -27,5 +28,9 @@ public class MainController {
 		model.addAttribute("stacks",stacks);
 		
 		return "stacks";
+	}
+	@GetMapping("/*")
+	public String redLogin(){
+		return "redirect:stacks";
 	}
 }

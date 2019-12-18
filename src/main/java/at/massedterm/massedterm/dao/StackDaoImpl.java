@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.security.Principal;
 import java.util.List;
 
 @Transactional
@@ -17,7 +19,6 @@ public class StackDaoImpl implements StackDao {
 	
 	@Override
 	public List<Stack> getAllStacks(String user) {
-		//String sql = "SELECT * FROM stacks";
 		String sql = "SELECT stacks.*, COUNT(cards.cardid) as cardCount FROM stacks LEFT JOIN cards ON cards.stackid = stacks.stackid group by 1 HAVING stacks.user="+"'"+user+"'";
 		return jdbcTemplate.query(
 						sql,
@@ -31,11 +32,10 @@ public class StackDaoImpl implements StackDao {
 	}
 	
 	@Override
-	public void addStack(Stack stack) {
-		/*
-		String query = "INSERT INTO stack(employee_id, first_name, last_name, email, phone, job_title) VALUES(?, ?, ?, ?, ?, ?)";
-		  jdbcTemplate.update(query, employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getJobTitle());
-	*/
+	public void addStack(String user, Stack stack) {
+		String query = "INSERT INTO stacks(stackname, user) VALUES(?, ?)";
+		jdbcTemplate.update(query, stack.getStackname(), user);
+		//TODO: create success/fail response
 	}
 	
 	@Override

@@ -39,10 +39,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		//disable the need to use csrf token for a successfull post request
+		//TODO: re-enable csrf and add token to POST-requests
+		http.csrf().disable();
+		//redirect to formLogin page if not logged in
 		http.authorizeRequests()
 				.antMatchers("/admin").hasRole("ADMIN")
 				.antMatchers("/user").hasAnyRole("ADMIN","USER")
-				.antMatchers("/").permitAll()
+				.antMatchers("/**").hasAnyRole("ADMIN","USER")
 				.and().formLogin();
 	}
 	@Bean
