@@ -2,7 +2,6 @@ CREATE DATABASE IF NOT EXISTS massedterm;
 
 CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(128) PRIMARY KEY,
-    username VARCHAR(128) PRIMARY KEY,
     password VARCHAR(128) NOT NULL,
     enabled CHAR(1) CHECK (ENABLED IN ('Y','N') ) NOT NULL
 );
