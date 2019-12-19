@@ -33,4 +33,5 @@ public class MainController {
 	public String redLogin(){
 		return "redirect:stacks";
 	}
+
 }
