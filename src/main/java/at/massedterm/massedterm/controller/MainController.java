@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.security.Principal;
 import java.util.List;
@@ -22,13 +23,18 @@ public class MainController {
 	
 	
 	@GetMapping("/stacks")
-	public String stacks(Model model, Principal principal){
-		String username = principal != null ? principal.getName() : "";
-		List<Stack> stacks = stackDao.getAllStacks(username);
-		model.addAttribute("stacks",stacks);
-		
+	public String stacks(){
+		//String username = principal != null ? principal.getName() : "";
+		//List<Stack> stacks = stackDao.getAllStacks(username);
+		//model.addAttribute("stacks",stacks);
 		return "stacks";
 	}
+	
+	@GetMapping("/stacks/{stackid}/learn")
+	public String learn(@PathVariable("stackid") int id){
+		return "learn";
+	}
+	
 	@GetMapping("/*")
 	public String redLogin(){
 		return "redirect:stacks";

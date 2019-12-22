@@ -36,7 +36,7 @@ public class StackDaoImpl implements StackDao {
 	}
 	
 	@Override
-	public void addStack(String user, Stack stack) {
+	public Number addStack(String user, Stack stack) {
 		
 		
 		String query = "INSERT INTO stacks(stackname, user) VALUES(?, ?)";
@@ -54,8 +54,7 @@ public class StackDaoImpl implements StackDao {
 		        }
 		    },
 		    keyHolder);
-		Number i =  keyHolder.getKey();
-		System.out.println(i);
+		return keyHolder.getKey();
 		//TODO: create success/fail response
 	}
 	

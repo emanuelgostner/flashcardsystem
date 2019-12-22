@@ -5,9 +5,10 @@
 #C1C8E4
 #8860D0
 */
-.card-columns > a > .card {
+.card-columns .card {
     transition: 0.4s;
 }
-.card-columns > a > .card:hover {
+.card-columns .card:hover {
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    background: #e5e5e5;
 }

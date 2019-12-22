@@ -21,8 +21,8 @@ public class StackRestController {
 	}
 	
 	@PostMapping("/webapi/stacks/addStack")
-	public void newStack(@RequestBody Stack newStack, Principal principal) {
+	public Number newStack(@RequestBody Stack newStack, Principal principal) {
 		String username = principal != null ? principal.getName() : "";
-		stackDao.addStack(username, newStack);
+		return stackDao.addStack(username, newStack);
 	}
 }
