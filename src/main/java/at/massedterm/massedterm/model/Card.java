@@ -3,10 +3,8 @@ package at.massedterm.massedterm.model;
 public class Card {
 	private long cardid;
 	private long stackid;
-	private String Question;
-	private String Answer;
-	private boolean isCorrect;
-	private int wrongness;
+	private String question;
+	private String answer;
 	
 	public void setCardid(long cardid) {
 		this.cardid = cardid;
@@ -21,34 +19,19 @@ public class Card {
 	}
 	
 	public String getQuestion() {
-		return Question;
+		return question;
 	}
 	
 	public void setQuestion(String question) {
-		Question = question;
+		this.question = question;
 	}
 	
 	public String getAnswer() {
-		return Answer;
+		return answer;
 	}
 	
 	public void setAnswer(String answer) {
-		Answer = answer;
+		this.answer = answer;
 	}
 	
-	public boolean isCorrect() {
-		return isCorrect;
-	}
-	
-	public void setCorrect(boolean correct) {
-		isCorrect = correct;
-	}
-	
-	public int getWrongness() {
-		return wrongness;
-	}
-	
-	public void setWrongness(int wrongness) {
-		this.wrongness = wrongness;
-	}
 }

@@ -36,6 +36,16 @@ CREATE TABLE IF NOT EXISTS rounds  (
     FOREIGN KEY (stackid) REFERENCES stacks(stackid)
 );
 
+CREATE TABLE IF NOT EXISTS responses  (
+    responseid INT PRIMARY KEY AUTO_INCREMENT,
+    roundid INT NOT NULL,
+    cardid INT NOT NULL,
+    isCorrect BOOLEAN NOT NULL DEFAULT 0,
+    timestamp datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    USER VARCHAR(255) NOT NULL,
+    FOREIGN KEY (roundid) REFERENCES rounds(roundid),
+    FOREIGN KEY (cardid) REFERENCES cards(cardid)
+);
 /*insert into users (username, password, enabled) values (
     'admin',
     'password',
