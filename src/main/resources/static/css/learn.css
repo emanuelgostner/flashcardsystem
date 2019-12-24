@@ -1,0 +1,22 @@
+.backgroundImage {
+    position: absolute;
+    z-index: -99;
+}
+.informationBar {
+    font-weight: 500;
+}
+.informationBar img {
+    height: 2em;
+}
+.informationLearned {
+    color: #ffc107;
+}
+.informationMastered {
+    color: #28a745;
+}
+svg {
+    display: block;
+    margin: auto;
+    width: 2em;
+    height: 2em;
+}
