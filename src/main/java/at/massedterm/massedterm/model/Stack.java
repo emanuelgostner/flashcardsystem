@@ -7,6 +7,7 @@ public class Stack {
 	private String stackname;
 	private String user;
 	private int cardCount;
+	private Round round;
 	private List<Card> cardlist;
 	
 	public void setStackid(long stackid) {
@@ -47,5 +48,13 @@ public class Stack {
 	
 	public void setCardlist(List<Card> cardlist) {
 		this.cardlist = cardlist;
+	}
+	
+	public Round getRound() {
+		return round;
+	}
+	
+	public void setRound(Round round) {
+		this.round = round;
 	}
 }

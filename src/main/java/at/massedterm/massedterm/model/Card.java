@@ -10,6 +10,10 @@ public class Card {
 		this.cardid = cardid;
 	}
 	
+	public long getCardid() {
+		return cardid;
+	}
+	
 	public long getStackid() {
 		return stackid;
 	}

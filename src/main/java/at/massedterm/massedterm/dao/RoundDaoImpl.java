@@ -46,6 +46,19 @@ public class RoundDaoImpl {
 						new BeanPropertyRowMapper(Card.class)
 				);
 		stack.setCardlist(cards);
+		String sqlRound = "SELECT roundid, stackid, UNIX_TIMESTAMP(TIMESTAMP) as timestamp, user FROM rounds WHERE stackid = "+stackid+" AND user = '"+user+"' ORDER BY TIMESTAMP DESC LIMIT 1";
+		Round round =  (Round) jdbcTemplate.queryForObject(
+				sqlRound,
+				new BeanPropertyRowMapper(Round.class)
+		);
+		
+		String sqlResponses = "SELECT responseid, roundid, cardid, isCorrect, UNIX_TIMESTAMP(TIMESTAMP) as timestamp FROM responses WHERE roundid = "+round.getRoundid()+" AND USER = '"+user+"'";
+		List<Response> responses =  jdbcTemplate.query(
+				sqlResponses,
+				new BeanPropertyRowMapper(Response.class)
+		);
+		round.setResponseList(responses);
+		stack.setRound(round);
 		return stack;
 	}
 }
