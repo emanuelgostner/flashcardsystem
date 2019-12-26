@@ -52,26 +52,7 @@
     </div>
     <div class="learnCardContainer">
         <div class="cardContainer">
-            <div class="actLearnCard card">
-              <div class="card-front card-face">
-                  <div class="card-face-inner">
-                      <div class="placeholder">
-                          <div class="placeholderItem"></div>
-                          <div class="placeholderItem"></div>
-                          <div class="placeholderItem"></div>
-                      </div>
-                  </div>
-              </div>
-                <div class="card-back card-face">
-                        <div class="card-face-inner">
-                            <div class="placeholder">
-                                <div class="placeholderItem"></div>
-                                <div class="placeholderItem"></div>
-                                <div class="placeholderItem"></div>
-                            </div>
-                        </div>
-                </div>
-            </div>
+
         </div>
         <div class="actLearnCardButtons">
             <div class="container">
@@ -92,6 +73,26 @@
         </div>
     </div>
 
+    <script id="learnCard-template" type="text">
+        <div class="card-front card-face">
+              <div class="card-face-inner">
+                  <div class="placeholder">
+                      <div class="placeholderItem"></div>
+                      <div class="placeholderItem"></div>
+                      <div class="placeholderItem"></div>
+                  </div>
+              </div>
+        </div>
+        <div class="card-back card-face">
+                <div class="card-face-inner">
+                    <div class="placeholder">
+                        <div class="placeholderItem"></div>
+                        <div class="placeholderItem"></div>
+                        <div class="placeholderItem"></div>
+                    </div>
+                </div>
+        </div>
+    </script>
     <script type="text/javascript" th:src="@{/js/lib/jtmpl.js}"></script>
     <script type="text/javascript" th:src="@{/js/lib/handlebars-v4.5.3.js}"></script>
     <script type="text/javascript" th:src="@{/js/learn.js}"></script>

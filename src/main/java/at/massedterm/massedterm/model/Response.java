@@ -38,4 +38,12 @@ public class Response {
 	public void setIsCorrect(boolean correct) {
 		isCorrect = correct;
 	}
+	
+	public int getTimestamp() {
+		return timestamp;
+	}
+	
+	public void setTimestamp(int timestamp) {
+		this.timestamp = timestamp;
+	}
 }

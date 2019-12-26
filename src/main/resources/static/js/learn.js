@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", function (event) {
-    document.getElementsByClassName("actLearnCard")[0].addEventListener('click', function (e) {
-        document.getElementsByClassName("actLearnCard")[0].classList.toggle("is-flipped");
-        if(document.getElementsByClassName("actLearnCard")[0].classList.contains("is-flipped"))
-            document.getElementsByClassName("actLearnCard")[0].style.transform = "rotateY(180deg)"
-        else
-            document.getElementsByClassName("actLearnCard")[0].style.transform = "rotateY(0deg)"
-    });
+
     //document.getElementsByClassName("cardContainer")[0].style.height = (window.innerHeight - document.getElementsByClassName("actLearnCardButtons")[0].clientHeight - document.getElementsByClassName("informationBar")[0].clientHeight)+"px";
     var data;
     var learnQueue = [], cards = [], unlearned = [], learned = [], mastered = [];
@@ -24,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         },
         "frontCard": document.querySelector(".card-front .card-face-inner"),
         "backCard": document.querySelector(".card-back .card-face-inner"),
-        "actLearnCard": document.getElementsByClassName("actLearnCard")[0]
+        "actLearnCard": document.getElementsByClassName("actLearnCard")[0],
+        "cardContainer": document.getElementsByClassName("cardContainer")[0]
     }
 
     var stackid = /stacks\/(\d)/g.exec(window.location.href)[1];
@@ -116,16 +111,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 } else
                     break;
             }
-        if (learnQueue.length > 0) {
-            console.log("call buildCards 3");
-            actCard = learnQueue.shift();
-            view.frontCard.innerHTML = actCard.question;
-            view.backCard.innerHTML = actCard.answer;
-        } else {
-            console.log("no cards left")
-            document.body.classList.add("showSpecialCardAllLearned");
-            document.body.classList.remove("showLearnCard");
-        }
+
         var status = {
             "data": data,
             "cards": cards,
@@ -173,13 +159,32 @@ document.addEventListener("DOMContentLoaded", function (event) {
         view.information.cards.innerHTML = cards.length + unlearned.length;
         view.information.learned.innerHTML = learned.length;
         view.information.mastered.innerHTML = mastered.length;
-        view.actLearnCard.style.transform = "rotateY(0deg)"
+        if (learnQueue.length > 0) {
+            actCard = learnQueue.shift();
+
+            var newCard = document.createElement('div');
+            newCard.className = "actLearnCard card";
+            newCard.innerHTML = document.getElementById("learnCard-template").innerHTML;
+            newCard.querySelector(".card-front .card-face-inner").innerHTML = actCard.question;
+            newCard.querySelector(".card-back .card-face-inner").innerHTML = actCard.answer;
+            view.cardContainer.insertBefore(newCard, view.cardContainer.firstChild);
+            //view.cardContainer.appendChild(newCard);
+            newCard.classList.add("learning");
+            newCard.addEventListener('click', function (e) {
+                newCard.classList.toggle("is-flipped");
+            });
+        } else {
+            console.log("no cards left")
+            document.body.classList.add("showSpecialCardAllLearned");
+            document.body.classList.remove("showLearnCard");
+        }
     }
 
     function cardFunctionality() {
         document.getElementsByClassName("answerIsIncorrect")[0].addEventListener("click", function (e) {
             console.log(actCard)
             postResponse(data.round.roundid, actCard.cardid, false);
+            view.cardContainer.firstChild.classList.add("nextCard");
             buildCards();
             updateView();
 
@@ -187,10 +192,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.getElementsByClassName("answerIsCorrect")[0].addEventListener("click", function (e) {
             console.log(actCard)
             postResponse(data.round.roundid, actCard.cardid, true);
+            view.cardContainer.firstChild.classList.add("nextCard");
             buildCards();
             updateView();
-
-
         });
         document.getElementsByClassName("specialCardButtonAllLearned")[0].addEventListener('click', function (e) {
             postRound();
@@ -204,29 +208,44 @@ document.addEventListener("DOMContentLoaded", function (event) {
             "roundid": roundid,
             "cardid": cardid,
             "isCorrect": isCorrect
-        }
+        };
         data.round.responseList.push(newResponse);
-        /*this.newStackname = newStackname;
-           fetch('./webapi/stacks/addStack', {
-               method: 'post',
-               headers: {
-                   'Accept': 'application/json, text/plain, *!/!*',
-                   'Content-Type': 'application/json'
-               },
-               body: JSON.stringify({'stackname': this.newStackname})
+       fetch('/webapi/stacks/'+stackid+'/addResponse', {
+           method: 'post',
+           headers: {
+               'Accept': 'application/json, text/plain, *!/!*',
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify(newResponse)
+       })
+           .then(res => res.json())
+           .then(function (data) {
+               console.log('Request succeeded with JSON response', data);
            })
-               .then(res => res.json())
-               .then(function (data) {
-                   console.log('Request succeeded with JSON response', data);
-               })
-               .catch(function (error) {
-                   console.log('Request failed', error);
-               });*/
+           .catch(function (error) {
+               console.log('Request failed', error);
+           });
     }
     function postRound() {
-        data.round.responseList =  [];
-        learnQueue = [];
-        buildCards();
-        updateView();
+        fetch('/webapi/stacks/'+stackid+'/addRound', {
+           method: 'post',
+           headers: {
+               'Accept': 'application/json, text/plain, *!/!*',
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({'stackid': data.stackid})
+       })
+           .then(res => res.json())
+           .then(function (response) {
+               console.log('Request succeeded with JSON response', response);
+               data.round.roundid = response;
+               data.round.responseList =  [];
+               learnQueue = [];
+               buildCards();
+               updateView();
+           })
+           .catch(function (error) {
+               console.log('Request failed', error);
+           });
     }
 })

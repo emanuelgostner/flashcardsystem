@@ -8,5 +8,7 @@ import java.util.List;
 public interface RoundDao {
 	public Round getActRound();
 	public Stack getStackFull();
+	public Number addRound();
+	public void addResponse();
 	
 }

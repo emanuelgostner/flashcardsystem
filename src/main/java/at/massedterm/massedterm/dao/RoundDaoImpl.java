@@ -7,9 +7,15 @@ import at.massedterm.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 @Transactional
@@ -66,5 +72,29 @@ public class RoundDaoImpl {
 		}
 		stack.setRound(round);
 		return stack;
+	}
+	
+	public Number addRound(String user, long stackid) {
+		
+		String query = "INSERT INTO rounds(stackid, user) VALUES(?, ?)";
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		jdbcTemplate.update(
+		    new PreparedStatementCreator() {
+		        public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
+		            PreparedStatement ps =
+		                connection.prepareStatement(query, new String[] {"id"});
+		            ps.setLong(1, stackid);
+		            ps.setString(2, user);
+		            return ps;
+		        }
+		    },
+		    keyHolder);
+		return keyHolder.getKey();
+		//TODO: create success/fail response
+	}
+	public void addResponse(String user, Response response) {
+		String query = "INSERT INTO responses(roundid, cardid, isCorrect, user) VALUES(?, ?, ?,? )";
+		jdbcTemplate.update(query, response.getRoundid(), response.getCardid(), response.getIsCorrect(), user);
 	}
 }
