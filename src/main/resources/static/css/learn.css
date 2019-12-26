@@ -8,11 +8,10 @@ html, body {
 .backgroundImage {
     position: absolute;
     z-index: -99;
-    width: 100%;
+    width:100%;
     height: 100%;
-    height: 100%;
-    background: url(/images/41293.jpg);
-    background-size: contain;
+    background: url(/images/123.jpg);
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .learnCardContainer {
@@ -21,6 +20,7 @@ html, body {
     max-width: 1000px;
     margin: auto;
     height: 91.5%;
+    display: none;
 }
 .cardContainer {
     width: 100%;
@@ -37,10 +37,16 @@ html, body {
     width: 100%;
     height: 100%;
     position: relative;
-    transition: transform 0.5s;
     transform-style: preserve-3d;
+    transition: transform 0.5s;
 }
-.actLearnCard.is-flipped {
+.actLearnCard.noTransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+.actLearnCard.is-flippedd {
   transform: rotateY(180deg);
 }
 .card-face {
@@ -58,6 +64,7 @@ html, body {
 .informationBar {
     font-weight: 500;
     background: white;
+    display: none;
 }
 .informationBar img {
     height: 30px;
@@ -113,4 +120,34 @@ svg {
 }
 .placeholderItem:nth-child(3) {
     width:100%;
+}
+.specialCardNoCards,
+.specialCardAllLearned,
+.learnCardContainer,
+.informationBar {
+    display: none;
+}
+.specialCardNoCards,
+.specialCardAllLearned {
+    width: 100%;
+    vertical-align: middle;
+    margin: auto;
+    max-width: 1000px;
+}
+.showSpecialCardNoCards,
+.showSpecialCardAllLearned{
+    display: table;
+    width: 100%;
+}
+.showLearnCard {
+    display: block;
+}
+.showSpecialCardNoCards .specialCardNoCards,
+.showSpecialCardAllLearned .specialCardAllLearned{
+    display: table-cell;
+}
+
+.showLearnCard .learnCardContainer,
+.showLearnCard .informationBar{
+    display: block;
 }
