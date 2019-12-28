@@ -1,0 +1,174 @@
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+.invertImage {
+    filter: invert(1);
+}
+.backgroundImage {
+    position: absolute;
+    z-index: -99;
+    width:100%;
+    height: 100%;
+    background: url(/images/123.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.learnCardContainer {
+    padding: 5px;
+    background-color: transparent;
+    max-width: 1000px;
+    margin: auto;
+    height: 91.5%;
+    display: none;
+}
+.cardContainer {
+    width: 100%;
+    height: 93%;
+    position: relative;
+    perspective: 1000px;
+}
+.card-face-inner {
+   display: table-cell;
+    vertical-align: middle;
+}
+.actLearnCard {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+    opacity: 0;
+    cursor: pointer;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+.actLearnCard.noTransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
+.actLearnCard.is-flipped {
+  transform: rotateY(180deg);
+}
+.card-face {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    padding: 2px;
+    display: table;
+    font-size: 1.5em;
+}
+.card-back {
+    transform: rotateY( 180deg );
+}
+.informationBar {
+    font-weight: 500;
+    background: white;
+    display: none;
+}
+.informationBar img {
+    height: 30px;
+}
+.informationLearned {
+    color: #ffc107;
+}
+.informationMastered {
+    color: #28a745;
+}
+svg {
+    display: block;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+}
+.placeholder {
+    padding: 8px;
+}
+.placeholderItem {
+    height: 30px;
+    background: #eaeaea;
+    border-radius: 0.25rem;
+    margin: 5px 0 5px 0;
+
+    background: #f6f7f8;
+      background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+      background-repeat: no-repeat;
+      background-size: 800px 104px;
+      display: inline-block;
+      position: relative;
+
+      -webkit-animation-duration: 1s;
+      -webkit-animation-fill-mode: forwards;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-name: placeholderShimmer;
+      -webkit-animation-timing-function: linear;
+}
+@-webkit-keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+.placeholderItem:nth-child(1) {
+    width:33%;
+}
+.placeholderItem:nth-child(2) {
+    width:66%;
+}
+.placeholderItem:nth-child(3) {
+    width:100%;
+}
+.specialCardNoCards,
+.specialCardAllLearned,
+.learnCardContainer,
+.informationBar {
+    display: none;
+}
+.specialCardNoCards,
+.specialCardAllLearned {
+    width: 100%;
+    vertical-align: middle;
+    margin: auto;
+    max-width: 1000px;
+}
+.showSpecialCardNoCards,
+.showSpecialCardAllLearned{
+    display: table;
+    width: 100%;
+}
+.showLearnCard {
+    display: block;
+}
+.showSpecialCardNoCards .specialCardNoCards,
+.showSpecialCardAllLearned .specialCardAllLearned{
+    display: table-cell;
+}
+
+.showLearnCard .learnCardContainer,
+.showLearnCard .informationBar{
+    display: block;
+}
+.nextCard {
+    position: absolute;
+    animation: nextCard 0.5s;
+    animation-fill-mode: forwards;
+}
+.learning {
+    opacity: 1
+}
+
+@keyframes nextCard {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-200%);
+        opacity: 0;
+    }
+}

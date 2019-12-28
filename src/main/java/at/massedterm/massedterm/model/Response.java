@@ -4,7 +4,8 @@ public class Response {
 	private long responseid;
 	private long roundid;
 	private long cardid;
-	private Boolean isCorrect;
+	private boolean isCorrect;
+	private int timestamp;
 	
 	public long getResponseid() {
 		return responseid;
@@ -30,11 +31,19 @@ public class Response {
 		this.cardid = cardid;
 	}
 	
-	public Boolean getCorrect() {
+	public boolean getIsCorrect() {
 		return isCorrect;
 	}
 	
-	public void setCorrect(Boolean correct) {
+	public void setIsCorrect(boolean correct) {
 		isCorrect = correct;
+	}
+	
+	public int getTimestamp() {
+		return timestamp;
+	}
+	
+	public void setTimestamp(int timestamp) {
+		this.timestamp = timestamp;
 	}
 }

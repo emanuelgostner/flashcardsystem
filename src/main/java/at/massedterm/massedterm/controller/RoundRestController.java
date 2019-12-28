@@ -1,10 +1,11 @@
 package at.massedterm.massedterm.controller;
 
 import at.massedterm.massedterm.dao.RoundDaoImpl;
+import at.massedterm.massedterm.model.Response;
 import at.massedterm.massedterm.model.Round;
+import at.massedterm.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -13,9 +14,25 @@ public class RoundRestController {
 	@Autowired
 		private RoundDaoImpl roundDao;
 		
-		@RequestMapping("/webapi/rounds/getActRounds")
-		public Round round(Principal principal) {
+		@RequestMapping("/webapi/stacks/{stackid}/getActRound")
+		public Round round(Principal principal, @PathVariable("stackid") int stackid) {
 			String username = principal != null ? principal.getName() : "";
-			return roundDao.getActRound(1, username);
+			return roundDao.getActRound(stackid, username);
 		}
+		@RequestMapping("/webapi/stacks/{stackid}/getStackFull")
+		public Stack stackFull(Principal principal, @PathVariable("stackid") int stackid) {
+			String username = principal != null ? principal.getName() : "";
+			return roundDao.getStackFull(stackid, username);
+		}
+		@PostMapping("/webapi/stacks/{stackid}/addRound")
+		public Number addRound(Principal principal, @PathVariable("stackid") int stackid) {
+			String username = principal != null ? principal.getName() : "";
+			return roundDao.addRound(username, stackid);
+		}
+		@PostMapping("/webapi/stacks/{stackid}/addResponse")
+		public void addResponse(@RequestBody Response newResponse, Principal principal) {
+			String username = principal != null ? principal.getName() : "";
+			roundDao.addResponse(username, newResponse);
+		}
+		
 }
