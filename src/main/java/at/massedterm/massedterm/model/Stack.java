@@ -1,5 +1,6 @@
 package at.massedterm.massedterm.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +27,15 @@ public class Stack {
 
 	/**
 	 * @var
+	 * was bedeutet cardCount genau. wird die Kartenanzahl des Stapels insgesamt gezählt oder
+	 * die Karten die ich während der Runde gelernt habe?
 	 */
 	private int cardCount;
+
+	/**
+	 * @var
+	 * eine round
+	 */
 	private Round round;
 
 	/**
@@ -36,7 +44,14 @@ public class Stack {
 	private List<Card> cardlist;
 
 	/**
-	 * gibt den StackID zurück
+	 * Konstruktor
+	 */
+	public Stack(){
+		this.cardlist = new ArrayList<>();
+	}
+
+	/**
+	 * gibt die StackID zurück
 	 * @return
 	 */
 	public long getStackid() {
@@ -44,8 +59,9 @@ public class Stack {
 	}
 
 	/**
-	 * setzt  die StackID
+	 * benennt die StackID
 	 * @param stackid
+	 * todo in DB schreiben
 	 */
 	public void setStackid(long stackid) {
 		this.stackid = stackid;
@@ -60,8 +76,9 @@ public class Stack {
 	}
 
 	/**
-	 * setzt den Stacknamen
+	 * benennt den Stacknamen
 	 * @param stackname
+	 * todo in DB schreiben
 	 */
 	public void setStackname(String stackname) {
 		this.stackname = stackname;
@@ -76,8 +93,9 @@ public class Stack {
 	}
 
 	/**
-	 * setzt den User
+	 * User festlegen
 	 * @param user
+	 * todo in DB schreiben
 	 */
 	public void setUser(String user) {
 		this.user = user;
@@ -92,8 +110,9 @@ public class Stack {
 	}
 
 	/**
-	 * setzt den CardCount
+	 * legt den Card Count fest
 	 * @param cardCount
+	 * todo in DB schreiben
 	 */
 	public void setCardCount(int cardCount) {
 		this.cardCount = cardCount;
@@ -108,17 +127,60 @@ public class Stack {
 	}
 
 	/**
-	 * setzt die CardList
+	 * gibt eine bestimmte Karte zurück an der Position Index.
+	 * @param index
+	 * @return
+	 */
+	public Card getCardAt(int index){
+		return cardlist.get(index);
+	}
+
+	/**
+	 * setzt die Card list ??? Kartenauswahl festlegen?
+	 * wirft die alten existierenden Karten weg.
+	 * setzt den CardCount zurück
 	 * @param cardlist
+	 * TODO: verifiziere ob gebraucht wird.
 	 */
 	public void setCardlist(List<Card> cardlist) {
 		this.cardlist = cardlist;
+		this.cardCount = cardlist.size();
 	}
 
+	/**
+	 * fügt eine Karte zu dem Stack
+	 * @param card
+	 *
+	 */
+	public void addCard(Card card){
+		this.cardlist.add(card);
+		this.cardCount++;
+	}
+
+	/**
+	 * löscht eine Karte
+	 * @param index
+	 * @return
+	 */
+	public Card removeCard(int index){
+		Card card = this.cardlist.remove(index);
+		this.cardCount--;
+		return card;
+
+	}
+
+	/**
+	 * gibt die Runde zurück
+	 * @return Round
+	 */
 	public Round getRound() {
 		return round;
 	}
 
+	/**
+	 * legt die Runde fest
+	 * @param round
+	 */
 	public void setRound(Round round) {
 		this.round = round;
 	}

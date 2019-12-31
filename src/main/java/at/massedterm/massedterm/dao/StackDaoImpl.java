@@ -36,6 +36,9 @@ public class StackDaoImpl implements StackDao {
 	}
 	
 	@Override
+	/**
+	 * @return Number The stack id
+	 */
 	public Number addStack(String user, Stack stack) {
 		
 		
