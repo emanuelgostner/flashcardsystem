@@ -17,15 +17,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 }
                 response.json().then(function (data) {
                     document.getElementsByClassName("stackContainer")[0].innerHTML = HandlebarsStacksTemplate(data);
-                    document.getElementsByClassName("addNewStack")[0].addEventListener('click', function(e) {
-                        data = {
-                            'stackname': '23123',
-                            'stackid':20,
-                            'cardCount':2
-                        }
-                        console.log(e);
-                        target.parentNode.insertBefore(HandlebarsCardTemplate(data))
-                        postNewStack(document.getElementsByClassName("input")[0].innerHTML())
+                    document.querySelector(".addNewStack button").addEventListener('click', function(e) {
+                        postNewStack(document.querySelector(".addNewStack input").value)
                     })
                 });
             }
@@ -47,6 +40,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
         })
             .then(res => res.json())
             .then(function (data) {
+                var newCardData = {
+                    "stackid": data,
+                    "stackname": this.newStackname,
+                    "cardCount": 0
+                }
+                var my_elem = document.getElementsByClassName('addNewStack')[0];
+                var newCard = document.createElement('span');
+                newCard.innerHTML = HandlebarsCardTemplate(newCardData);
+                my_elem.parentNode.insertBefore(newCard, my_elem);
+                document.querySelector(".addNewStack input").value = "";
                 console.log('Request succeeded with JSON response', data);
             })
             .catch(function (error) {
