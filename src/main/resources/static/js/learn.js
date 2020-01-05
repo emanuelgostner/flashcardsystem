@@ -159,6 +159,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         view.information.cards.innerHTML = cards.length + unlearned.length;
         view.information.learned.innerHTML = learned.length;
         view.information.mastered.innerHTML = mastered.length;
+        var total = cards.length + unlearned.length + learned.length + mastered.length;
+        var ratio = mastered.length / total * 100;
+        document.getElementsByClassName("progress-bar")[0].style.width = ratio + "%";
         if (learnQueue.length > 0) {
             actCard = learnQueue.shift();
 
