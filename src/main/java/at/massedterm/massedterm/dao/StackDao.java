@@ -9,5 +9,5 @@ public interface StackDao {
 	public Stack findStackById(long id);
 	public Number addStack(String user, Stack stack);
 	public void updateStack(Stack stack);
-	public void deleteStack(long id);
+	public void deleteStack(String user, Stack stack);
 }

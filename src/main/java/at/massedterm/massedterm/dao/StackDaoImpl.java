@@ -23,11 +23,11 @@ public class StackDaoImpl implements StackDao {
 	
 	@Override
 	public List<Stack> getAllStacks(String user) {
-		String sql = "SELECT stacks.*, COUNT(cards.cardid) as cardCount FROM stacks LEFT JOIN cards ON cards.stackid = stacks.stackid group by 1 HAVING stacks.user="+"'"+user+"'";
+		String sql = "SELECT stacks.*, COUNT(cards.cardid) as cardCount FROM stacks LEFT JOIN cards ON cards.stackid = stacks.stackid group by 1 HAVING stacks.user="+"'"+user+"' AND stacks.deleted=0";
 		return jdbcTemplate.query(
-						sql,
-						new BeanPropertyRowMapper(Stack.class)
-				);
+			sql,
+			new BeanPropertyRowMapper(Stack.class)
+		);
 	}
 	
 	@Override
@@ -40,11 +40,7 @@ public class StackDaoImpl implements StackDao {
 	 * @return Number The stack id
 	 */
 	public Number addStack(String user, Stack stack) {
-		
-		
 		String query = "INSERT INTO stacks(stackname, user) VALUES(?, ?)";
-		//jdbcTemplate.update(query, stack.getStackname(), user);
-		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		jdbcTemplate.update(
 		    new PreparedStatementCreator() {
@@ -67,7 +63,8 @@ public class StackDaoImpl implements StackDao {
 	}
 	
 	@Override
-	public void deleteStack(long id) {
-	
+	public void deleteStack(String user, Stack stack) {
+		String queryDeleteStack = "UPDATE stacks SET deleted = 1 WHERE stackid=? AND USER = ?";
+		jdbcTemplate.update(queryDeleteStack, stack.getStackid(), user);
 	}
 }

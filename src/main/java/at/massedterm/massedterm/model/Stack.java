@@ -27,8 +27,7 @@ public class Stack {
 
 	/**
 	 * @var
-	 * was bedeutet cardCount genau. wird die Kartenanzahl des Stapels insgesamt gezählt oder
-	 * die Karten die ich während der Runde gelernt habe?
+	 * Eine Liste aller Karten, welche diesem Stack referenziert sind (One to many)
 	 */
 	private int cardCount;
 
