@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         "cardContainer": document.getElementsByClassName("cardContainer")[0]
     }
 
-    var stackid = /stacks\/(\d)/g.exec(window.location.href)[1];
+    var stackid = /stacks\/(\d*)\//g.exec(window.location.href)[1];
 
     fetch("/webapi/stacks/" + stackid + "/getStackFull")
         .then(
