@@ -3,3 +3,12 @@ body {
     /*background-image: url(https://image.winudf.com/v2/image/Y29tLm5pZ2h0c2t5d2FsbHBhcGVyLmhkLm5pZ2h0c2t5cGljdHVyZXMucGhvdG9zLmJhY2tncm91bmQuY3V0ZS5jb29sLmFydC5uaWdodHNreWltYWdlcy5oZC5mcmVlX3NjcmVlbl8yXzE1MzMyNTAxODRfMDk0/screen-2.jpg?fakeurl=1&type=.jpg);*/
     background-size: cover;
 }
+.backgroundImage {
+    position: absolute;
+    z-index: -99;
+    width:100%;
+    height: 100%;
+    background: url("/images/123.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
