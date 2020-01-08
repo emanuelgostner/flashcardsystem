@@ -10,8 +10,19 @@ html, body {
     background-color: transparent;
     max-width: 1000px;
     margin: auto;
-    height: 91.5%;
+    height: 88%;
     display: none;
+}
+.actLearnCardButtons {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
+@media (max-width: 750px) {
+    .learnCardContainer {
+        height: 80%;
+    }
 }
 .cardContainer {
     width: 100%;
