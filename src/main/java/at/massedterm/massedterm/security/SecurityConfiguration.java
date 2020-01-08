@@ -12,12 +12,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
+/**
+ *???
+ * das heißt die daten kommen aus der datenbank die in application.properties definiert ist. ansonsten aus data.sql/schema.sql
+ * was ist die data.sql/schema.sql???
+ */
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	//The source of data from a database, this can (and is) set in the application.properties (otherwise the embedded h2 database with schema data.sql/schema.sql would be used)
+	//The source of data from a database, this can (and is) set in the application.properties
+	// (otherwise the embedded h2 database with schema data.sql/schema.sql would be used)
 	@Autowired
 	DataSource dataSource;
-	
+
+	/**
+	 * auth. = authentication???
+	 * was heißt jdbc??? -> Java Database Connectivity = Datenbankverbindungsfähigkeit -> die Fähigkeit aus der Datenbank etwas rauszulesen.
+	 * @param auth
+	 * @throws Exception
+	 */
 	//Override auth. mechanism, in this case override with jdbc mechanism
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
