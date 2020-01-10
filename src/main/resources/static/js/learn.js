@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", function (event) {
+    /*
+    * Current stackid, retrieved from the url
+    * */
     var stackid = /stacks\/(\d*)\//g.exec(window.location.href)[1];
+    /*
+    * response from server. Contains Stack, cards, round, responses
+    * */
     var data;
+    /*
+    * Contains cards
+    * learnQue: cards that will show next in view
+    * cards: cards that have not been shown yet
+    * unlearned: cards that were always answered wrongly
+    * learned: cards that were anwered wrongly once/multiple times but correctly the last time
+    * mastered: cards that were answered correctly; cards that were answered correctly multiple times after answering them wrong
+    * */
     var learnQueue = [], cards = [], unlearned = [], learned = [], mastered = [];
     var actCard;
     var maxWrongness = 2;
@@ -42,21 +56,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
             document.body.classList.add("showSpecialCardNoCards");
         }
     }
-
+    /*
+    * Build a javascript object and sort the responses to corresponding cards
+    * */
     function buildCards() {
         /*
-        * Card variables
-        *
-        * cards: contains all the cards that have not been shown yet
-        * unlearned: cards that were always answered wrongly
-        * learned: cards that were anwered wrongly once/multiple times but correctly the last time
-        * mastered: cards that were answered correctly; cards that were answered correctly multiple times after answering them wrong
+        * reset cards
         * */
         cards = [], unlearned = [], learned = [], mastered = [];
 
         /*
-        * Loop trough the fetchObject to assign responses to cards
-        * and to calculate how often a card has been answered correctly/wrongly
+        * Loop trough the data:
+        * -to assign responses to cards
+        * -to calculate how often a card has been answered correctly/wrongly
+        * -to get the last user response for each card
         * */
         for (var i = 0; i < data.cardlist.length; i++) {
             var card = data.cardlist[i];
@@ -66,6 +79,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
             card["wrongness"] = calculateWrongness(maxWrongness, responses);
             card["isCorrect"] = getLastResponse(responses);
 
+            /*
+            * Assign each card to a specific card container depending of:
+            * -total answer
+            * -wrongness factor
+            * -last answer (correct/incorrect)
+            * */
             if (responses.length == 0) {
                 cards.push(card);
             } else if (card["wrongness"] === 0 && card["isCorrect"]) {
@@ -76,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 unlearned.push(card);
             }
         }
+
         /*
         * Add Card to leanQueue
         * First: cards that were answered wrongly
@@ -227,7 +247,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     * */
     function cardFunctionality() {
         document.getElementsByClassName("answerIsIncorrect")[0].addEventListener("click", function (e) {
-            console.log(actCard)
             postResponse(data.round.roundid, actCard.cardid, false);
             view.cardContainer.firstChild.classList.add("nextCard");
             buildCards();
@@ -235,7 +254,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         });
         document.getElementsByClassName("answerIsCorrect")[0].addEventListener("click", function (e) {
-            console.log(actCard)
             postResponse(data.round.roundid, actCard.cardid, true);
             view.cardContainer.firstChild.classList.add("nextCard");
             buildCards();
