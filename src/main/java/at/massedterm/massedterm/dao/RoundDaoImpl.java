@@ -42,34 +42,43 @@ public class RoundDaoImpl {
 	}
 	public Stack getStackFull(long stackid, String user){
 		String sqlStack = "SELECT stackid, stackname, user FROM stacks where stackid = "+stackid+" AND user="+"'"+user+"'";
+		
 		Stack stack =  (Stack) jdbcTemplate.queryForObject(
 				sqlStack,
 				new BeanPropertyRowMapper(Stack.class)
 		);
+		
 		String sqlCards = "SELECT cardid, stackid, question, answer  FROM cards where stackid = "+stackid+" AND (SELECT user FROM stacks WHERE stackid = "+stackid+")="+"'"+user+"'";
 				List<Card> cards = jdbcTemplate.query(
 						sqlCards,
 						new BeanPropertyRowMapper(Card.class)
 				);
+				
 		stack.setCardlist(cards);
 		String sqlRound = "SELECT roundid, stackid, UNIX_TIMESTAMP(TIMESTAMP) as timestamp, user FROM rounds WHERE stackid = "+stackid+" AND user = '"+user+"' ORDER BY TIMESTAMP DESC LIMIT 1";
 		Round round;
+		
 		try {
 			round = (Round) jdbcTemplate.queryForObject(
 					sqlRound,
 					new BeanPropertyRowMapper(Round.class)
 			);
 		}catch(Exception e) {
-			round = null;
-		}
-		if(round != null) {
-			String sqlResponses = "SELECT responseid, roundid, cardid, isCorrect, UNIX_TIMESTAMP(TIMESTAMP) as timestamp FROM responses WHERE roundid = " + round.getRoundid() + " AND USER = '" + user + "'";
-			List<Response> responses = jdbcTemplate.query(
-					sqlResponses,
-					new BeanPropertyRowMapper(Response.class)
+			String sqlInitialRound = "INSERT INTO rounds(stackid, user) VALUES( "+stackid+",'"+user+"' )";
+			jdbcTemplate.update(sqlInitialRound);
+			round = (Round) jdbcTemplate.queryForObject(
+					sqlRound,
+					new BeanPropertyRowMapper(Round.class)
 			);
-			round.setResponseList(responses);
 		}
+		
+		String sqlResponses = "SELECT responseid, roundid, cardid, isCorrect, UNIX_TIMESTAMP(TIMESTAMP) as timestamp FROM responses WHERE roundid = " + round.getRoundid() + " AND USER = '" + user + "'";
+		List<Response> responses = jdbcTemplate.query(
+				sqlResponses,
+				new BeanPropertyRowMapper(Response.class)
+		);
+		
+		round.setResponseList(responses);
 		stack.setRound(round);
 		return stack;
 	}
