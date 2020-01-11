@@ -8,6 +8,6 @@ public interface StackDao {
 	public List<Stack> getAllStacks(String user);
 	public Stack findStackById(long id);
 	public Number addStack(String user, Stack stack);
-	public void updateStack(Stack stack);
+	public void updateStack(String user, Stack stack);
 	public void deleteStack(String user, Stack stack);
 }

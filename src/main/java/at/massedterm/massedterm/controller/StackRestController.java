@@ -31,4 +31,10 @@ public class StackRestController {
 		String username = principal != null ? principal.getName() : "";
 		stackDao.deleteStack(username, stack);
 	}
+	
+	@PostMapping("/webapi/stacks/updateStack")
+	public void updateStack(@RequestBody Stack stack, Principal principal) {
+		String username = principal != null ? principal.getName() : "";
+		stackDao.updateStack(username, stack);
+	}
 }

@@ -61,8 +61,9 @@ public class StackDaoImpl implements StackDao {
 	}
 	
 	@Override
-	public void updateStack(Stack stack) {
-	
+	public void updateStack(String user, Stack stack) {
+		String queryUpdateStack = "UPDATE stacks SET stackname=? WHERE stackid=? AND USER = ?";
+		jdbcTemplate.update(queryUpdateStack, stack.getStackname() ,stack.getStackid(), user);
 	}
 	
 	@Override
