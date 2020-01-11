@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Cards</title>
+    <link rel="stylesheet" th:href="@{/css/_bootstrap_reboot.css}"/>
+    <link rel="stylesheet" th:href="@{/css/_bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/cards.css}"/>
 </head>
 <body>
-<div class="cardContainer">
-
+<div class="container">
+    <div class="row">
+        <div class="mx-sm-3 mb-2">
+            <input type="text" class="form-control updateStackInput" placeholder="Change stackname">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 updateStackButton">Update</button>
+    </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="cardsContainer">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="addNewCard">
+                <div class="row align-items-end">
+                    <div class="col">
+                        <div class="">Question</div>
+                        <textarea name="" class="cardQuestion" rows="4"></textarea></div>
+                    <div class="col">
+                        <div class="">Answer</div>
+                        <textarea name="" class="cardAnswer" rows="4"></textarea></div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/lib/handlebars-v4.5.3.js}"></script>
+<script type="text/javascript" th:src="@{/js/card.js}"></script>
 </body>
 </html>

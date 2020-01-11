@@ -18,9 +18,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+/*
+* Transactional: all operations should happen entirely or not at all
+* */
 @Transactional
+/*
+* Repository annotation: indicates that the class provides mechanisms CRUD operations on objects
+* */
 @Repository
-public class RoundDaoImpl {
+public class RoundDaoImpl implements RoundDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	

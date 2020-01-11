@@ -28,11 +28,6 @@ public class Response {
 	private boolean isCorrect;
 
 	/**
-	 * @var
-	 */
-	private int timestamp;
-
-	/**
 	 *gibt die Response ID zurück
 	 * @return
 	 */
@@ -95,21 +90,5 @@ public class Response {
 	 */
 	public void setIsCorrect(boolean correct) {
 		isCorrect = correct;
-	}
-
-	/**
-	 * gibt den timestamp aus
-	 * @return
-	 */
-	public int getTimestamp() {
-		return timestamp;
-	}
-
-	/**
-	 * legt den timestamp fest
-	 * @param timestamp
-	 */
-	public void setTimestamp(int timestamp) {
-		this.timestamp = timestamp;
 	}
 }

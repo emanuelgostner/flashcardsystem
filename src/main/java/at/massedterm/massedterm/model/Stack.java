@@ -135,11 +135,8 @@ public class Stack {
 	}
 
 	/**
-	 * setzt die Card list ??? Kartenauswahl festlegen?
-	 * wirft die alten existierenden Karten weg.
-	 * setzt den CardCount zurück
+	 * setzt die cardlist
 	 * @param cardlist
-	 * TODO: verifiziere ob gebraucht wird.
 	 */
 	public void setCardlist(List<Card> cardlist) {
 		this.cardlist = cardlist;

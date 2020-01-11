@@ -29,15 +29,7 @@ public class CardDaoImpl implements CardDao {
                 new BeanPropertyRowMapper(Card.class)
         );
     }
-
-    @Override
-    /**
-     * toDo:
-     */
-    public Card findCardById(long id) {
-        return null;
-    }
-
+    
     @Override
     /**
      * @return Number The card id

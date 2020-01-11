@@ -35,6 +35,11 @@ public class MainController {
 		return "learn";
 	}
 	
+	@GetMapping("/stacks/{stackid}/cards")
+	public String cards(@PathVariable("stackid") int id){
+		return "cards";
+	}
+	
 	@GetMapping("/*")
 	public String redLogin(){
 		return "redirect:stacks";

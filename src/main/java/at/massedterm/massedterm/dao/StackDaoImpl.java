@@ -32,14 +32,6 @@ public class StackDaoImpl implements StackDao {
 	
 	@Override
 	/**
-	 * toDo:
-	 */
-	public Stack findStackById(long id) {
-		return null;
-	}
-	
-	@Override
-	/**
 	 * @return Number The stack id
 	 */
 	public Number addStack(String user, Stack stack) {

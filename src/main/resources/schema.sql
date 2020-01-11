@@ -24,8 +24,6 @@ CREATE TABLE IF NOT EXISTS cards  (
     stackid INT NOT NULL,
     question VARCHAR(255) NOT NULL,
     answer VARCHAR(255) NOT NULL,
-    isCorrect BOOLEAN NOT NULL DEFAULT 0,
-    wrongness INT NOT NULL DEFAULT 1,
     FOREIGN KEY (stackid) REFERENCES stacks(stackid)
 );
 
