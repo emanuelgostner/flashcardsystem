@@ -23,7 +23,7 @@ public class CardDaoImpl implements CardDao {
 
     @Override
     public List<Card> getAllCards(long stackid) {
-        String sql = "SELECT * WHERE stackid = ?";
+        String sql = "SELECT * from cards WHERE stackid = "+stackid;
         return jdbcTemplate.query(
                 sql,
                 new BeanPropertyRowMapper(Card.class)
@@ -51,8 +51,8 @@ public class CardDaoImpl implements CardDao {
                         PreparedStatement ps =
                                 connection.prepareStatement(query, new String[]{"id"});
                         ps.setString(1, card.getQuestion());
-                        ps.setString(1, card.getAnswer());
-                        ps.setLong(1, card.getStackid());
+                        ps.setString(2, card.getAnswer());
+                        ps.setLong(3, card.getStackid());
                         return ps;
                     }
                 },

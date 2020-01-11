@@ -3,6 +3,7 @@ package at.massedterm.massedterm.controller;
 import at.massedterm.massedterm.dao.CardDaoImpl;
 import at.massedterm.massedterm.model.Card;
 import at.massedterm.massedterm.model.Round;
+import at.massedterm.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +16,8 @@ public class CardController {
     private CardDaoImpl cardDao;
 
     @PostMapping("/webapi/cards/getAllCards")
-    public List<Card> allCards (@PathVariable("stackid") int stackid) {
-        return cardDao.getAllCards(stackid);
+    public List<Card> allCards (@RequestBody Stack stack) {
+        return cardDao.getAllCards(stack.getStackid());
     }
 
     @PostMapping("/webapi/cards/addCard")
