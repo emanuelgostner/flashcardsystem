@@ -10,3 +10,13 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+.invertImage {
+    filter: invert(1);
+    height: 30px;
+}
+@media (min-width: 570px) {
+    .updateStackInput {
+        display: inline;
+        width: auto;
+    }
+}

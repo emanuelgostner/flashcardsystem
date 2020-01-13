@@ -39,7 +39,7 @@
         <div class="card m-1 text-center">
             <div class="card-body">
                 <h2 class="card-title specialCardTitle">There are no cards in this set 🤔</h2>
-                <a href="/stacks" class="btn btn-primary specialCardButton">Add cards</a>
+                <a th:href="@{'/stacks/'+${stackid}+'/cards'}" class="btn btn-primary specialCardButton">Add cards</a>
             </div>
         </div>
     </div>

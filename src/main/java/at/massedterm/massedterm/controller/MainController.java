@@ -31,12 +31,14 @@ public class MainController {
 	}
 	
 	@GetMapping("/stacks/{stackid}/learn")
-	public String learn(@PathVariable("stackid") int id){
+	public String learn(@PathVariable("stackid") int id, Model model){
+		model.addAttribute("stackid",id);
 		return "learn";
 	}
 	
 	@GetMapping("/stacks/{stackid}/cards")
-	public String cards(@PathVariable("stackid") int id){
+	public String cards(@PathVariable("stackid") int id, Model model){
+		model.addAttribute("stackid",id);
 		return "cards";
 	}
 	
