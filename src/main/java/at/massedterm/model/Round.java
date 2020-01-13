@@ -1,4 +1,4 @@
-package at.massedterm.massedterm.model;
+package at.massedterm.model;
 
 import java.util.List;
 

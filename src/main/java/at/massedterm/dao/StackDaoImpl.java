@@ -1,6 +1,6 @@
-package at.massedterm.massedterm.dao;
+package at.massedterm.dao;
 
-import at.massedterm.massedterm.model.Stack;
+import at.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.security.Principal;
 import java.sql.*;
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package at.massedterm.massedterm.dao;
+package at.massedterm.dao;
 
-import at.massedterm.massedterm.model.Card;
+import at.massedterm.model.Card;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package at.massedterm.massedterm.dao;
+package at.massedterm.dao;
 
-import at.massedterm.massedterm.model.Card;
-import at.massedterm.massedterm.model.Response;
-import at.massedterm.massedterm.model.Round;
-import at.massedterm.massedterm.model.Stack;
+import at.massedterm.model.Card;
+import at.massedterm.model.Response;
+import at.massedterm.model.Round;
+import at.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,9 +1,8 @@
-package at.massedterm.massedterm.controller;
+package at.massedterm.controller;
 
-import at.massedterm.massedterm.dao.StackDaoImpl;
-import at.massedterm.massedterm.model.Stack;
+import at.massedterm.dao.StackDaoImpl;
+import at.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;

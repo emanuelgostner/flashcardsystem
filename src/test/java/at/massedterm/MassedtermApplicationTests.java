@@ -1,4 +1,4 @@
-package at.massedterm.massedterm;
+package at.massedterm;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

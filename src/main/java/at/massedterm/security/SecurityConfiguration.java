@@ -1,4 +1,4 @@
-package at.massedterm.massedterm.security;
+package at.massedterm.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

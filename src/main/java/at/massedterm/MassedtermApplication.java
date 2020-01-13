@@ -1,4 +1,4 @@
-package at.massedterm.massedterm;
+package at.massedterm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

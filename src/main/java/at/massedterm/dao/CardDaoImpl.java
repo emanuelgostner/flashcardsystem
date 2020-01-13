@@ -1,6 +1,6 @@
-package at.massedterm.massedterm.dao;
+package at.massedterm.dao;
 
-import at.massedterm.massedterm.model.Card;
+import at.massedterm.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

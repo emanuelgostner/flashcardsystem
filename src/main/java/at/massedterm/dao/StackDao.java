@@ -1,6 +1,6 @@
-package at.massedterm.massedterm.dao;
+package at.massedterm.dao;
 
-import at.massedterm.massedterm.model.Stack;
+import at.massedterm.model.Stack;
 
 import java.util.List;
 

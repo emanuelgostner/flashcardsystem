@@ -1,9 +1,9 @@
-package at.massedterm.massedterm.controller;
+package at.massedterm.controller;
 
-import at.massedterm.massedterm.dao.RoundDaoImpl;
-import at.massedterm.massedterm.model.Response;
-import at.massedterm.massedterm.model.Round;
-import at.massedterm.massedterm.model.Stack;
+import at.massedterm.dao.RoundDaoImpl;
+import at.massedterm.model.Response;
+import at.massedterm.model.Round;
+import at.massedterm.model.Stack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,15 +1,11 @@
-package at.massedterm.massedterm.controller;
+package at.massedterm.controller;
 
-import at.massedterm.massedterm.dao.StackDaoImpl;
-import at.massedterm.massedterm.model.Stack;
+import at.massedterm.dao.StackDaoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class MainController {

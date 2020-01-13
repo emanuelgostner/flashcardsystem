@@ -1,10 +1,8 @@
-package at.massedterm.massedterm.dao;
+package at.massedterm.dao;
 
-import at.massedterm.massedterm.model.Response;
-import at.massedterm.massedterm.model.Round;
-import at.massedterm.massedterm.model.Stack;
-
-import java.util.List;
+import at.massedterm.model.Response;
+import at.massedterm.model.Round;
+import at.massedterm.model.Stack;
 
 public interface RoundDao {
 	public Round getActRound(long stackid, String user);
