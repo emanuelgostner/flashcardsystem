@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     * */
     var view = {
         "cardsContainer": document.getElementsByClassName("cardsContainer")[0],
-        "updateStack": {
+        "stack": {
             "input": document.getElementsByClassName("updateStackInput")[0],
-            "button": document.getElementsByClassName("updateStackButton")[0]
+            "update": document.getElementsByClassName("btnUpdateStack")[0],
+            "delete": document.getElementsByClassName("btnDeleteStack")[0]
         },
         "newCard": {
             "question": document.getElementsByClassName("cardQuestion")[0],
@@ -82,15 +83,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     function clickHandler() {
+        /*
+        * Handler for cardContainer
+        * */
         view.cardsContainer.addEventListener("click", function (e) {
+            /*
+            * Click Card Update Button
+            * */
             if (e.target.classList.contains("btnUpdateCard")) {
                 var card = {
-                    "stackid": e.target.dataset.stackid,
+                    "stackid": stackid,
                     "cardid": e.target.dataset.cardid,
                     "question": e.target.closest('.cardItem').querySelector(".cardQuestion .ql-editor").innerHTML,
                     "answer": e.target.closest('.cardItem').querySelector(".cardAnswer .ql-editor").innerHTML
                 };
                 serverpost("/webapi/cards/updateCard", card)
+                /*
+                * Click Card Delete Button
+                * */
             } else if (e.target.classList.contains("btnDeleteCard")) {
                 card = {
                     "cardid": e.target.dataset.cardid
@@ -98,6 +108,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 serverpost("/webapi/cards/deleteCard", card);
                 e.target.closest(".card").remove();
             }
+        });
+
+        /*
+        * Handler for Stack Buttons
+        * */
+        view.stack.update.addEventListener("click", function () {
+            serverpost("/webapi/stacks/updateStack", {'stackid': stackid, 'stackname': view.stack.input.value})
+        });
+        view.stack.delete.addEventListener("click", function () {
+            serverpost("/webapi/stacks/deleteStack", {'stackid': stackid})
         })
     }
 
@@ -142,4 +162,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 console.log('Request failed', error);
             });
     }
-})
+});
