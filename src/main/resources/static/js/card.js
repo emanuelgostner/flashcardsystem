@@ -29,38 +29,78 @@ document.addEventListener("DOMContentLoaded", function (event) {
     * Initialization
     * */
     init();
+
     function init() {
         initQuill(view.newCard.question);
         initQuill(view.newCard.answer);
         newCardFunctionality();
-        fetchAllCards();
+        serverpost("/webapi/cards/getAllCards", {"stackid": stackid}, fetchedCardsFunctionality);
+        //fetchAllCards();
+        clickHandler();
     }
-    function newCardFunctionality() {
-        view.newCard.button.addEventListener("click", function() {
-            var newCard = {
-            	"stackid":stackid,
-            	"question": view.newCard.question.querySelector(".ql-editor").innerHTML,
-            	"answer": view.newCard.answer.querySelector(".ql-editor").innerHTML
-            };
-            postNewCard(newCard);
-            var card = document.createElement("div");
-            card.innerHTML = HandlebarsNewCardTemplate([newCard]);
-            view.cardsContainer.appendChild(card);
-            initQuill(card.querySelector(".cardQuestion"));
-            initQuill(card.querySelector(".cardAnswer"));
-            view.newCard.question.querySelector(".ql-editor").innerHTML = "";
-            view.newCard.answer.querySelector(".ql-editor").innerHTML = "";
-        })
 
+    function newCardFunctionality() {
+        /*
+        * Get entered value from input fields and post to server
+        * */
+        view.newCard.button.addEventListener("click", function () {
+            var newCard = {
+                "stackid": stackid,
+                "question": view.newCard.question.querySelector(".ql-editor").innerHTML,
+                "answer": view.newCard.answer.querySelector(".ql-editor").innerHTML
+            };
+            serverpost('/webapi/cards/addCard', newCard, function (cardid) {
+                /*
+                * Add newly created card also to the user GUI
+                * */
+                newCard['cardid'] = cardid;
+                var card = document.createElement("div");
+                card.innerHTML = HandlebarsNewCardTemplate([newCard]);
+                view.cardsContainer.appendChild(card);
+                initQuill(card.querySelector(".cardQuestion"));
+                initQuill(card.querySelector(".cardAnswer"));
+                view.newCard.question.querySelector(".ql-editor").innerHTML = "";
+                view.newCard.answer.querySelector(".ql-editor").innerHTML = "";
+            });
+        })
     }
+
     function fetchedCardsFunctionality(data) {
+        /*
+        * create Template for all fetched cards
+        * */
         view.cardsContainer.innerHTML = HandlebarsNewCardTemplate(data);
         var cardItems = document.getElementsByClassName("cardItem");
-        for(var i = 0; cardItems.length; i++) {
+
+        /*
+        * Init Rich-Text-Editor for fetched cards
+        * */
+        for (var i = 0; cardItems.length; i++) {
             initQuill(cardItems[i].querySelector(".cardQuestion"));
             initQuill(cardItems[i].querySelector(".cardAnswer"));
         }
     }
+
+    function clickHandler() {
+        view.cardsContainer.addEventListener("click", function (e) {
+            if (e.target.classList.contains("btnUpdateCard")) {
+                var card = {
+                    "stackid": e.target.dataset.stackid,
+                    "cardid": e.target.dataset.cardid,
+                    "question": e.target.closest('.cardItem').querySelector(".cardQuestion .ql-editor").innerHTML,
+                    "answer": e.target.closest('.cardItem').querySelector(".cardAnswer .ql-editor").innerHTML
+                };
+                serverpost("/webapi/cards/updateCard", card)
+            } else if (e.target.classList.contains("btnDeleteCard")) {
+                card = {
+                    "cardid": e.target.dataset.cardid
+                };
+                serverpost("/webapi/cards/deleteCard", card);
+                e.target.closest(".card").remove();
+            }
+        })
+    }
+
     /*
     * Create new Rich-text-editor instance
     * */
@@ -77,39 +117,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
             theme: 'snow'  // or 'bubble'
         });
     }
-    function fetchAllCards() {
-        fetch('/webapi/cards/getAllCards', {
+
+    /*
+    * Server post
+    * @param url of the server to which the post request points
+    * @param obj which shall be posted to the server
+    * @param func function to call after successfull post
+    * */
+    function serverpost(url, obj, func) {
+        fetch(url, {
             method: 'post',
             headers: {
                 'Accept': 'application/json, text/plain, */*',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"stackid": stackid})
+            body: JSON.stringify(obj)
         })
             .then(res => res.json())
-            .then(function (data) {
-                console.log('Request succeeded with JSON response', data);
-                fetchedCardsFunctionality(data);
+            .then(function (response) {
+                if (typeof func == "function")
+                    func(response);
             })
             .catch(function (error) {
                 console.log('Request failed', error);
             });
-    }
-    function postNewCard(newCard) {
-        fetch('/webapi/cards/addCard', {
-                   method: 'post',
-                   headers: {
-                       'Accept': 'application/json, text/plain, */*',
-                       'Content-Type': 'application/json'
-                   },
-                   body: JSON.stringify(newCard)
-               })
-                   .then(res => res.json())
-                   .then(function (response) {
-
-                   })
-                   .catch(function (error) {
-                       console.log('Request failed', error);
-                   });
     }
 })
