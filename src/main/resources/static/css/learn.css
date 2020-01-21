@@ -80,6 +80,7 @@ html, body {
     background-repeat: no-repeat;
     background-size: 100px;
     transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
 }
 .card-back {
     transform: rotateY( 180deg );
