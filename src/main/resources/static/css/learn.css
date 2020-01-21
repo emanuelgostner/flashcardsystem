@@ -29,6 +29,10 @@ html, body {
     height: 93%;
     position: relative;
     perspective: 1000px;
+    -webkit-perspective: 1000px;
+    -o-perspective: 1000px;
+    -ms-perspective: 1000px;
+    -moz-perspective: 1000px;
 }
 .card-face-inner {
    display: table-cell;
@@ -39,7 +43,12 @@ html, body {
     height: 100%;
     position: absolute;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
     transition: 0.5s;
+    -webkit-transition: 0.5s ;
     opacity: 0;
     cursor: pointer;
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
@@ -52,12 +61,17 @@ html, body {
 }
 .actLearnCard.is-flipped {
   transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 .card-face {
     position: absolute;
     height: 100%;
     width: 100%;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
     padding: 2px;
     display: table;
     font-size: 1.5em;
@@ -68,6 +82,10 @@ html, body {
 }
 .card-back {
     transform: rotateY( 180deg );
+    -ms-transform: rotateY( 180deg );
+    -webkit-transform: rotateY( 180deg );
+    -o-transform: rotateY( 180deg );
+    -moz-transform: rotateY( 180deg );
 }
 .informationBar {
     font-weight: 500;
@@ -171,10 +189,21 @@ svg {
 @keyframes nextCard {
     0% {
         transform: translateX(0);
+        -ms-transform: rotateX( 0 );
+        -webkit-transform: rotateX( 0 );
+        -o-transform: rotateX(0);
+        -moz-transform: rotateX( 0 );
         opacity: 1;
+        -moz-opacity: 1;
+
     }
     100% {
         transform: translateX(-200%);
+        -ms-transform: translateX(-200%);
+        -webkit-transform: translateX(-200%);
+        -o-transform: translateX(-200%);
+        -moz-transform: translateX(-200%);
         opacity: 0;
+        -moz-opacity: 0;
     }
 }
