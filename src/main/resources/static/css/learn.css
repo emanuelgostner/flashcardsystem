@@ -79,6 +79,7 @@ html, body {
     background-position: bottom right;
     background-repeat: no-repeat;
     background-size: 100px;
+    translate: rotatex(0);
 }
 .card-back {
     transform: rotateY( 180deg );
