@@ -48,7 +48,6 @@ public class StackDaoImpl implements StackDao {
 		    },
 		    keyHolder);
 		return keyHolder.getKey();
-		//TODO: create success/fail response
 	}
 	
 	@Override

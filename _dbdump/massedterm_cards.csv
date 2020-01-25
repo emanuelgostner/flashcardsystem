@@ -1,4 +1,0 @@
-41,62,<p>Deadlock</p>,<p>Prozesse warten auf eine Resource welche von einem anderen Prozess besetzt wird.</p><p>Voraussetzungen:</p><ul><li>Mutual exclusion</li><li>hold and wait</li><li>non preemptable</li><li>circular wait condition</li></ul>,0,1
-42,62,<p>Unsafe state</p>,<p>multiple processes could end up in a Deadlock but theiy are (yet) currently</p>,0,1
-43,62,<p>Prozess</p>,<p>Programm in Ausführung</p>,0,1
-44,65,<p>Frage</p>,<p>Antwort</p>,0,1

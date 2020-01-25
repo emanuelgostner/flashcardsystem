@@ -50,7 +50,6 @@ public class CardDaoImpl implements CardDao {
                 },
                 keyHolder);
         return keyHolder.getKey();
-        //TODO: create success/fail response
     }
 
     @Override

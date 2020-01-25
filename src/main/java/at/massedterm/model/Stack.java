@@ -60,7 +60,6 @@ public class Stack {
 	/**
 	 * benennt die StackID
 	 * @param stackid
-	 * todo in DB schreiben
 	 */
 	public void setStackid(long stackid) {
 		this.stackid = stackid;
@@ -77,7 +76,6 @@ public class Stack {
 	/**
 	 * benennt den Stacknamen
 	 * @param stackname
-	 * todo in DB schreiben
 	 */
 	public void setStackname(String stackname) {
 		this.stackname = stackname;
@@ -94,7 +92,6 @@ public class Stack {
 	/**
 	 * User festlegen
 	 * @param user
-	 * todo in DB schreiben
 	 */
 	public void setUser(String user) {
 		this.user = user;
@@ -111,7 +108,6 @@ public class Stack {
 	/**
 	 * legt den Card Count fest
 	 * @param cardCount
-	 * todo in DB schreiben
 	 */
 	public void setCardCount(int cardCount) {
 		this.cardCount = cardCount;

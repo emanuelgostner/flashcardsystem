@@ -106,7 +106,6 @@ public class RoundDaoImpl implements RoundDao {
 		    },
 		    keyHolder);
 		return keyHolder.getKey();
-		//TODO: create success/fail response
 	}
 	public void addResponse(String user, Response response) {
 		String query = "INSERT INTO responses(roundid, cardid, isCorrect, user) VALUES(?, ?, ?,? )";
