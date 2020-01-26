@@ -7,8 +7,12 @@ Card-View: Add cards to specific stack<br/>
 Learn-View: Learn Stack with its cards<br/>
 ![image](https://user-images.githubusercontent.com/13123637/73137559-d2230980-4059-11ea-8c4d-36b77e34de43.png)
 ![flashcardsystemshowoff](https://user-images.githubusercontent.com/13123637/73137730-b456a400-405b-11ea-8018-efbf4b8a8433.gif)
+
+## Database design
+![MASSED_flashcards_ERM](https://user-images.githubusercontent.com/13123637/73137892-2380c800-405d-11ea-9ff8-beead63eadc1.png)
 ## Stack
 Spring boot<br/>
 Thymeleaf<br/>
 JDBC<br/>
-MySQL
+MySQL<br/>
+Spring security
